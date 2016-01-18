@@ -1,0 +1,49 @@
+# author: luoli02@meituan.com
+root: true
+extends: airbnb
+parser: babel-eslint
+plugins:
+    - react
+rules:
+    indent:
+        - 2
+        - 4
+    # 函数内首行不允许为空
+    padded-blocks: 0
+    # 定义却未使用的变量
+    no-unused-vars: 0
+    # 例如 foo && fn()
+    no-unused-expressions: 0
+    # 倾向 const
+    prefer-const: 0
+    # 数组和对象最后一个元素需加逗号
+    comma-dangle: 0
+    # 允许 形如 /// 的注释
+    spaced-comment:
+        - 2
+        - always
+        -
+            markers:
+                - /
+    # jsx 的缩进使用4个空格
+    react/jsx-indent-props:
+        - 2
+        - 4
+    # 使用 JSX 的地方需引入 react
+    react/react-in-jsx-scope: 0
+    # 不允许多个组件返回?
+    react/no-multi-comp: 0
+    # 像是不允许 return 时使用函数? 如 return fn();
+    consistent-return: 0
+    # 使用之前定义
+    no-use-before-define: 0
+    # 函数定义在 return 之前?
+    no-inner-declarations: 0
+    # function 的名字首字母要小写. new 操作符后面的函数名字首字母要符合 Pascal 命名法
+    new-cap: 0
+    # 不修改参数
+    no-param-reassign: 0
+    # 匿名函数增加函数名称  babel在编译类似的函数时 会出现莫名其妙的bug 所以这个禁用.
+    func-names: 0
+env:
+    commonjs: true

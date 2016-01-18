@@ -1,0 +1,129 @@
+.@{prefixName}-calendar {
+
+    &-container {
+        position: relative;
+        font-size: 12px;
+    }
+
+    &-content {
+        position: absolute;
+        top: 100%;
+        z-index: 9;
+        background-color: white;
+        width: 230px;
+        -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    &-cell {
+        float: left;
+        height: 30px;
+        .btn, .btn-primary, .btn-info, .btn-danger, .btn-warning, .btn-success {
+            padding: 6px; border: 0;
+            line-height: 18px;
+            &:hover {
+                background-color: lighten(@brand-theme, 40%);
+                color: @brand-theme;
+            }
+        }
+    }
+    
+    &-header {
+        height: 46px;
+        line-height: 46px;
+        background-color: @brand-theme;
+        &-cell-arrow, &-cell {
+            width: 25%;
+            text-align: center;
+            .btn ,.btn-default {
+                background-color: @brand-theme;
+                color: white;
+                &:hover {
+                    background-color: darken(@brand-theme, 10%);
+                    color: white;
+                }
+            }
+        }
+        &-cell-arrow {
+            .btn, .btn-default {
+                width: 30px;
+                border-radius: 50%;
+            }
+        }
+
+    }
+
+    &-body {
+        width: 210px;
+        margin: 0 auto;
+        position: relative;
+    }
+
+    &-cell-footer {
+        width: 100%;
+        .btn-link {
+            color: @brand-theme;
+        }
+        .btn-default {
+            border-radius: 0;
+            border: 0;
+            background-color: @brand-theme;
+            color: white;
+            &:hover {
+                background-color: darken(@brand-theme, 10%);
+            }
+        }
+    }
+
+    &-cell-current .btn-default{
+        color: @brand-theme;
+        background-color: lighten(@brand-theme, 40%);
+    }
+
+    &-cell-day {
+        width: 30px;
+        .btn, .btn-primary, .btn-info, .btn-danger, .btn-warning, .btn-success {
+            border-radius: 50%;
+        }
+    }
+
+    &-cell-day-header {
+        .btn, .btn-default {
+            color: @brand-theme;
+            border-radius: 0;
+            border-bottom: 1px solid #cecece;
+            &:hover {
+                background-color: white;
+            }
+        }
+    }
+
+    &-cell-selected .btn-default {
+        color: #ffffff;
+        background-color: @brand-theme;
+        &:hover {
+            color: #ffffff;
+            background-color: @brand-theme;
+        }
+    }
+
+
+
+    &-cell-month {
+        width: 33.33%;
+    }
+    &-cell-year {
+        width: 25%;
+    }
+    &-cell-time {
+        width: 33.33%;
+    }
+    &-cell-hour {
+        width: 25%;
+    }
+    &-cell-60 {
+        width: 16.66%;
+    }
+
+
+}

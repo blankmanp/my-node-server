@@ -1,0 +1,1 @@
+* style和size这部分的控制启示是在控制button的表现，所可以参考cat-button的api

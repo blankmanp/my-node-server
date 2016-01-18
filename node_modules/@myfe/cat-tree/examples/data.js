@@ -1,0 +1,253 @@
+export default [{
+    name: '天天平价',
+    href: '/price',
+    icon: 'glyphicon-yen',
+    children: [{
+        name: '供给劣势场次',
+        href: '/pages/price/weakness.jsp',
+        icon: 'glyphicon glyphicon-pencil',
+    }, {
+        name: '售价优劣势情况',
+        href: '/price/weak-selling-price',
+        icon: 'glyphicon glyphicon-pencil',
+    }, {
+        name: '区域/城市劣势情况',
+        children: [{
+            name: '区域劣势情况',
+            href: '/pages/price/weakarea.jsp'
+        }, {
+            name: '城市劣势情况',
+            href: '/pages/price/weakcity.jsp'
+        }, {
+            name: '隐藏',
+            href: '/pages/price/hidden.jsp',
+            hidden: true
+        }]
+    }, {
+        name: '独家策略',
+        href: '/pages/price/solo.jsp',
+        icon: 'glyphicon glyphicon-pencil',
+        children: [{
+            name: '测试1',
+            href: '/page/price/weakarea1'
+        }, {
+            name: '测试2',
+            href: '/page/price/weakarea2'
+        }]
+    }, {
+        name: '竞对活动影片',
+        href: '/pages/price/poimovie.jsp',
+        icon: 'glyphicon glyphicon-pencil',
+    }, {
+        name: '竞对活动影院',
+        href: '/pages/price/poicinema.jsp',
+        icon: 'glyphicon glyphicon-pencil',
+    }, {
+        name: '活动明细',
+        href: '/pages/price/poidetail.jsp',
+        icon: 'glyphicon glyphicon-pencil',
+    }]
+}, {
+    name: '活动管理',
+    href: '/activity',
+    icon: 'glyphicon-calendar',
+    children: [{
+        name: '观影指南',
+        href: '/pages/activity/movie_guide.jsp'
+    }, {
+        name: '启动图管理',
+        href: '/pages/activity/movie_poster.jsp'
+    }, {
+        name: '活动组',
+        href: '/pages/activity/activity_group.jsp'
+    }, {
+        name: '一口价活动',
+        href: '/pages/activity/fixed_price.jsp'
+    }, {
+        name: '阶梯定价活动',
+        href: '/pages/activity/step_pricing.jsp'
+    }, {
+        name: '特惠活动',
+        href: '/pages/activity/activity_manage.jsp'
+    }, {
+        name: '满减活动',
+        href: '/pages/activity/full_reduction.jsp'
+    }, {
+        name: '用户筛选工具',
+        href: '/pages/activity/user_filter.jsp'
+    }, {
+        name: '购票后活动',
+        href: '/pages/activity/coupon_add.jsp'
+    }, {
+        name: '用户精准营销',
+        href: '/pages/activity/market_task.jsp'
+    }, {
+        name: '短信管理后台',
+        href: '/pages/activity/message_manage.jsp'
+
+    }, {
+        name: '影院通知',
+        href: '/pages/activity/cinema_notice.jsp'
+    }, {
+        name: '成交短信管理',
+        href: '/pages/seat/seat_sms.jsp'
+    }, {
+        name: '包场信息',
+        href: '/pages/activity/booking_show.jsp'
+    }, {
+        name: '团购屏蔽',
+        href: '/pages/activity/group_shield.jsp'
+    }, {
+        name: '优惠券',
+        children: [{
+            name: '优惠券管理',
+            href: '/pages/activity/coupon_manage.jsp'
+        }, {
+            name: '红包活动管理',
+            href: '/pages/activity/out_magic_manager.jsp'
+        }, {
+            name: '代金券查询',
+            href: '/pages/activity/voucher_list.jsp'
+        }, {
+            name: '通兑券查询',
+            href: '/pages/activity/exchange_list.jsp'
+        }]
+    }, {
+        name: '活动文案管理',
+        href: '/pages/activity/copywritten_manage.jsp'
+    }, {
+        name: '虚拟场次管理',
+        href: '/pages/seat/seat_virtual.jsp'
+    }]
+}, {
+    name: '在线选座',
+    href: '/seat',
+    icon: 'glyphicon-th',
+    children: [{
+        name: '上线申请管理',
+        href: '/pages/seat/onlineApply_manage.jsp'
+    }, {
+        name: '选座项目管理',
+        href: '/seat/seat-manage'
+    }, {
+        name: '选座调价规则',
+        href: '/pages/seat/seat_price.jsp'
+    }, {
+        name: '调价申请管理',
+        children: [{
+            name: '常规调价',
+            href: '/pages/seat/price_manage.jsp'
+        }, {
+            name: '活动调价',
+            href: '/pages/seat/topic_price_manage.jsp'
+        }]
+    }, {
+        name: '最低限价管理',
+        href: '/pages/seat/seat_limit.jsp'
+    }, {
+        name: '选座订单管理',
+        href: '/pages/seat/seat_order.jsp'
+    }, {
+        name: '订单修改/导出',
+        href: '/pages/seat/seat_order_modify.jsp'
+    }, {
+        name: '差异订单监控',
+        href: '/pages/seat/diff_order_monitor.jsp'
+    }, {
+        name: '选座影厅管理',
+        href: '/pages/seat/seat_halls.jsp'
+    }, {
+        name: '自动禁售场次',
+        href: '/pages/seat/seat_ban_list.jsp'
+    }, {
+        name: '场次禁售管理',
+        href: '/pages/seat/seat_ban.jsp'
+    }, {
+        name: '任务发布管理',
+        href: '/pages/seat/task_manage.jsp'
+    }, {
+        name: '异常场次管理',
+        href: '/pages/seat/seat_audit.jsp'
+    }, {
+        name: '节假日调休日',
+        href: '/pages/seat/seat_holidays.jsp'
+    }, {
+        name: '故障影院报警',
+        href: '/pages/seat/seat_cinema_alert.jsp'
+    }, {
+        name: '操作记录',
+        href: '/pages/seat/seat_op_log.jsp'
+    }, {
+        name: '售票系统监控工具',
+        children: [{
+            name: '监控分析',
+            href: '/pages/seat/system_monitor.jsp'
+        }, {
+            name: '故障分析解析配置',
+            href: '/pages/seat/fault_analysis.jsp'
+        }]
+    }, {
+        name: '服务费跟进',
+        href: '/seat/fee-follow'
+    },{
+        name: '服务费规则管理',
+        children: [{
+            name: '售票系统服务费规则',
+            href: '/seat/service-charge/sale-system-service-charge'
+        },{
+            name: '影院服务费规则',
+            href: '/seat/service-charge/cinema-service-charge'
+        }]
+    }]
+}, {
+    name: '机具管理',
+    href: '/machine',
+    icon: 'glyphicon-magnet',
+    children: [{
+        name: '数据看板',
+        href: '/pages/machine/machine_data.jsp'
+    }, {
+        name: '影院在线率报表',
+        href: '/pages/machine/cinema_online_list.jsp'
+    }, {
+        name: '在线率报表',
+        href: '/pages/machine/online_list.jsp'
+    }, {
+        name: '出票机状态',
+        href: '/pages/seat/machine_status.jsp'
+    }, {
+        name: '出票机维修',
+        href: '/pages/seat/machine_repair.jsp'
+    }, {
+        name: '影院管理',
+        href: '/pages/seat/machine_cinema.jsp'
+    }]
+}, {
+    name: '客服操作',
+    href: '/service',
+    icon: 'glyphicon-earphone',
+    children: [{
+        name: '在线选座客服',
+        href: '/pages/service/service_seat.jsp',
+        target: '_blank'
+    }, {
+        name: '选座影院查询',
+        href: '/pages/service/service_seat_cinema.jsp',
+        target: '_blank'
+    }]
+}, {
+    name: '系统设置',
+    href: '/system',
+    icon: 'glyphicon-cog',
+    children: [{
+        name: '后台调试',
+        href: '/system/proxy_ip.jsp'
+    }, {
+        name: '禁售管理',
+        href: '/system/srcSwitchManager.jsp'
+    }, {
+        name: '权限管理',
+        href: '/pages/system/privileges.jsp',
+        // href: '/system/privileges'
+    }]
+}];

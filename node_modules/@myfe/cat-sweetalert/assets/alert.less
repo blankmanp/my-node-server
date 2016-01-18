@@ -1,0 +1,45 @@
+.cat-sweetalert {
+    margin: -15px;
+    background-color: white;
+}
+.cat-confirm, .cat-sweetalert {
+    >button {
+        float: right;margin-right: 10px;
+    }
+}
+
+.cat-alert-container {
+    position: relative;
+
+    text-align: center;
+
+    i {
+        font-size: 60px;
+        position: absolute;
+        top: 50%;margin-top: -40px;
+        left: 10%;
+    }
+
+    >div {
+        float: left;margin-left: 30%;margin-bottom: 20px;padding-left: 20px;
+        width: 66%;
+        border-left: 1px dashed #999;
+        text-align: left;
+    }
+    .glyphicon-ok-sign {
+        color: @brand-success;
+    }
+
+    .glyphicon-info-sign {
+        color: @brand-info;
+    }
+
+    .glyphicon-bell {
+        color: @brand-warning;
+    }
+
+    .glyphicon-alert {
+        color: @brand-danger;
+    }
+}
+

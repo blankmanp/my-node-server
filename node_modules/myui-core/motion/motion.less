@@ -1,0 +1,33 @@
+.motion-common() {
+	animation-duration: .3s;
+	animation-fill-mode: both;
+}
+.make-motion(@className, @keyframeName) {
+	.@{className}-enter,
+	.@{className}-appear {
+		.motion-common();
+		opacity: 0;
+		animation-play-state: paused;
+	}
+	.@{className}-leave {
+		.motion-common();
+		animation-play-state: paused;
+	}
+	/** generate for simple css **/
+	.@{className}-in,
+	.@{className}-out {
+		.motion-common();
+	}
+
+	.@{className}-in,
+	.@{className}-enter.@{className}-enter-active,
+	.@{className}-appear.@{className}-appear-active {
+		animation-name: ~"@{keyframeName}In";
+		animation-play-state: running;
+	}
+	.@{className}-out,
+	.@{className}-leave.@{className}-leave-active {
+		animation-name: ~"@{keyframeName}Out";
+		animation-play-state: running;
+	}
+}

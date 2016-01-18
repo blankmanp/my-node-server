@@ -1,0 +1,16 @@
+// Pagination
+
+.pagination-size(@padding-vertical; @padding-horizontal; @font-size; @line-height; @width) {
+  > li {
+    > a,
+    > span {
+      padding: @padding-vertical*2 @padding-horizontal/2;
+      font-size: @font-size;
+      line-height: @line-height;
+      min-width: @width;
+    }
+    input {
+      padding: @padding-vertical*2 @padding-horizontal/2;
+    }
+  }
+}
