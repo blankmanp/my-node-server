@@ -68,12 +68,12 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	_reactDom2.default.render(_react2.default.createElement(_test2.default, { value: 1 }), document.getElementsByClassName('container')[0]); /*
-	                                                                                                                                         * @Author: pengyanxin
-	                                                                                                                                         * @Date:   2016-01-15 15:19:19
-	                                                                                                                                         * @Last Modified by:   pengyanxin
-	                                                                                                                                         * @Last Modified time: 2016-01-18 15:33:17
-	                                                                                                                                         */
+	_reactDom2.default.render(_react2.default.createElement(_test2.default, null), document.getElementsByClassName('container')[0]); /*
+	                                                                                                                                 * @Author: pengyanxin
+	                                                                                                                                 * @Date:   2016-01-15 15:19:19
+	                                                                                                                                 * @Last Modified by:   pengyanxin
+	                                                                                                                                 * @Last Modified time: 2016-01-18 16:53:44
+	                                                                                                                                 */
 
 /***/ },
 /* 2 */
@@ -19750,51 +19750,20 @@
 	var Hello = function (_React$Component) {
 	  _inherits(Hello, _React$Component);
 
-	  function Hello(props) {
+	  function Hello() {
 	    _classCallCheck(this, Hello);
 
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Hello).call(this, props));
-
-	    _this.initial();
-	    _this.handleClick = _this.handleClick.bind(_this);
-	    return _this;
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Hello).apply(this, arguments));
 	  }
 
 	  _createClass(Hello, [{
-	    key: 'initial',
-	    value: function initial() {
-	      this.state = {
-	        liked: false
-	      };
-	    }
-	  }, {
-	    key: 'handleClick',
-	    value: function handleClick() {
-	      this.setState({
-	        liked: !this.state.liked
-	      });
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var text = this.state.liked ? 'liked' : 'did not like';
 	      return _react2.default.createElement(
-	        'div',
-	        { onClick: this.handleClick },
-	        _react2.default.createElement(
-	          'h1',
-	          null,
-	          ' hello ',
-	          this.props.myName,
-	          ' '
-	        ),
-	        _react2.default.createElement(
-	          'p',
-	          null,
-	          'you ',
-	          text,
-	          ' this, click to toggle'
-	        )
+	        'h1',
+	        null,
+	        'Hello ',
+	        this.props.name
 	      );
 	    }
 	  }]);
@@ -19802,15 +19771,13 @@
 	  return Hello;
 	}(_react2.default.Component);
 
-	exports.default = Hello;
-
 	Hello.propTypes = {
-	  myName: _react2.default.PropTypes.string.isRequired
+	  name: _react2.default.PropTypes.string
 	};
-
 	Hello.defaultProps = {
-	  myName: 'lalala'
+	  name: 'lalala'
 	};
+	exports.default = Hello;
 
 /***/ }
 /******/ ]);
