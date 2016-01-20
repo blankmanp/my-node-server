@@ -1,13 +1,12 @@
 /*
 * @Author: pengyanxin
 * @Date:   2016-01-15 15:19:19
-* @Last Modified by:   pengyanxin
-* @Last Modified time: 2016-01-18 16:53:44
+* @Last Modified by:   blankmanp
+* @Last Modified time: 2016-01-20 19:34:13
 */
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Hello from './test';
 
 
-ReactDOM.render(<Hello />, document.getElementsByClassName('container')[0]);
+// ReactDOM.render(<Hello />, document.getElementsByClassName('container')[0]);

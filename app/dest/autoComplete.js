@@ -28,12 +28,10 @@ var AutoComplete = function (_React$component) {
     return AutoComplete;
 }(_react2.default.component);
 
-exports.default = AutoComplete;
-
-AutoComplete.propsType = {
-    autoCompleteData: _react2.default.PropTypes.array.isRequired
+AutoComplete.propTypes = {
+    value: _react2.default.PropTypes.string
 };
-
 AutoComplete.defaultProps = {
-    autoCompleteData: ['abadon', 'abc', 'apple', 'test', 'fun', 'hhh']
+    value: ''
 };
+exports.default = AutoComplete;
