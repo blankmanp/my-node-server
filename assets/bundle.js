@@ -19772,7 +19772,8 @@
 	}(_react2.default.Component);
 
 	Hello.propTypes = {
-	  name: _react2.default.PropTypes.string
+	  name: _react2.default.PropTypes.string,
+	  data: _react2.default.PropTypes.array
 	};
 	Hello.defaultProps = {
 	  name: 'lalala'
