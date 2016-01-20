@@ -1,5 +1,7 @@
 'use strict';
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
@@ -22,16 +24,33 @@ var AutoComplete = function (_React$component) {
     function AutoComplete(props) {
         _classCallCheck(this, AutoComplete);
 
-        return _possibleConstructorReturn(this, Object.getPrototypeOf(AutoComplete).call(this, props));
+        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(AutoComplete).call(this, props));
+
+        _this.state = {
+            results: [],
+            index: -1,
+            showList: false,
+            value: ''
+        };
+        return _this;
     }
+
+    _createClass(AutoComplete, [{
+        key: 'render',
+        value: function render() {
+            return;
+        }
+    }]);
 
     return AutoComplete;
 }(_react2.default.component);
 
 AutoComplete.propTypes = {
-    value: _react2.default.PropTypes.string
+    value: _react2.default.PropTypes.string,
+    list: _react2.default.PropTypes.array
 };
 AutoComplete.defaultProps = {
-    value: ''
+    value: '',
+    list: []
 };
 exports.default = AutoComplete;
