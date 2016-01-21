@@ -36,9 +36,22 @@ var AutoComplete = function (_React$component) {
     }
 
     _createClass(AutoComplete, [{
+        key: 'componentWillMonut',
+        value: function componentWillMonut() {}
+    }, {
+        key: 'componentWillReceiveProps',
+        value: function componentWillReceiveProps() {}
+    }, {
+        key: 'handleChange',
+        value: function handleChange() {}
+    }, {
         key: 'render',
         value: function render() {
-            return;
+            return _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement('input', { type: 'text', onChange: this.handleChange })
+            );
         }
     }]);
 
@@ -47,7 +60,7 @@ var AutoComplete = function (_React$component) {
 
 AutoComplete.propTypes = {
     value: _react2.default.PropTypes.string,
-    list: _react2.default.PropTypes.array
+    list: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.array, _react2.default.PropTypes.object])
 };
 AutoComplete.defaultProps = {
     value: '',

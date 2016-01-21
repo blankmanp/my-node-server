@@ -5,7 +5,7 @@ export default class AutoComplete extends React.component {
 
     static propTypes = {
         value: React.PropTypes.string,
-        list: React.PropTypes.array
+        list: React.PropTypes.oneOfType([React.PropTypes.array, React.PropTypes.object])
     };
 
     static defaultProps = {
@@ -23,7 +23,17 @@ export default class AutoComplete extends React.component {
         };
     }
 
+    componentWillMonut() {}
+
+    componentWillReceiveProps() {}
+
+    handleChange() {}
+
     render() {
-        return;
+        return (
+            <div>
+                <input type="text" onChange={this.handleChange} />
+            </div>
+        );
     }
 }
