@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-export default class AutoComplete extends React.component {
+export default class AutoComplete extends React.Component {
 
     static propTypes = {
         value: React.PropTypes.string,
@@ -23,16 +23,18 @@ export default class AutoComplete extends React.component {
         };
     }
 
-    componentWillMonut() {}
-
     componentWillReceiveProps() {}
 
-    handleChange() {}
+    componentWillMonut() {}
+
+    handleChange(e) {
+        let value = e.target.value;
+    }
 
     render() {
         return (
             <div>
-                <input type="text" onChange={this.handleChange} />
+                <input type="text" value={this.props.value} onChange={this.handleChange} />
             </div>
         );
     }
