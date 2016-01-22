@@ -27,11 +27,24 @@ export default class AutoComplete extends React.Component {
 
     componentWillMonut() {}
 
+    handleFocus(e) {
+        this.setState({
+            showList: true
+        });
+    }
+
+    handleBlur(e) {
+        this.setState({
+            showList: false
+        });
+    }
+
     handleChange(e) {
         let value = e.target.value;
     }
 
     render() {
+        let { showList, index, value } = this.state;
         return (
             <div>
                 <input type="text" value={this.props.value} onChange={this.handleChange} />

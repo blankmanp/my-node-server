@@ -19771,6 +19771,20 @@
 	        key: 'componentWillMonut',
 	        value: function componentWillMonut() {}
 	    }, {
+	        key: 'handleFocus',
+	        value: function handleFocus(e) {
+	            this.setState({
+	                showList: true
+	            });
+	        }
+	    }, {
+	        key: 'handleBlur',
+	        value: function handleBlur(e) {
+	            this.setState({
+	                showList: false
+	            });
+	        }
+	    }, {
 	        key: 'handleChange',
 	        value: function handleChange(e) {
 	            var value = e.target.value;
@@ -19778,6 +19792,11 @@
 	    }, {
 	        key: 'render',
 	        value: function render() {
+	            var _state = this.state;
+	            var showList = _state.showList;
+	            var index = _state.index;
+	            var value = _state.value;
+
 	            return _react2.default.createElement(
 	                'div',
 	                null,
