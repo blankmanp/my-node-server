@@ -25,7 +25,11 @@ export default class AutoComplete extends React.Component {
             showList: false,
             value: ''
         };
-    };
+    }
+
+    componentWillReceiveProps() {}
+
+    componentWillMonut() {}
 
     _list;
 
@@ -36,7 +40,7 @@ export default class AutoComplete extends React.Component {
     _formatList() {
         let tempList = this.props.list;
         if (_.isArray(tempList)) {
-            let tempObj = {}
+            let tempObj = {};
             return _.map(tempList, (value) => {
                 if (_.isObject(value)) {
                     tempObj[this.props.valueName] = value[this.props.valueName];
@@ -46,20 +50,16 @@ export default class AutoComplete extends React.Component {
                 tempObj[this.props.valueName] = value;
                 tempObj[this.props.labelName] = value;
                 return tempObj;
-            })
+            });
         } else if (_.isObject(tempList)) {
             let tempObj = {};
             return _.map(tempList, (value, key) => {
                 tempObj[this.props.valueName] = value;
                 tempObj[this.props.labelName] = key;
                 return tempObj;
-            })
+            });
         }
     }
-
-    componentWillReceiveProps() {}
-
-    componentWillMonut() {}
 
     handleFocus(e) {
         this.setState({
@@ -82,7 +82,7 @@ export default class AutoComplete extends React.Component {
         let { showList, index, value } = this.state;
         let ulStyle = {
             display: showList ? 'block' : 'none'
-        }
+        };
         return (
             <div>
                 <input type="text" value={this.props.value} onChange={this.handleChange} />
