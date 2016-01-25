@@ -1,4 +1,5 @@
-node_modules/*
-assets/*
+node_modules
+assets
 app/dest/*
 README.md
+*.js

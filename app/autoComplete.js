@@ -34,7 +34,7 @@ export default class AutoComplete extends React.Component {
     _list;
 
     _getResult(value) {
-
+        _list = this._formatList();
     }
 
     _formatList() {

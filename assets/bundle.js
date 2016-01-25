@@ -19778,7 +19778,9 @@
 	        value: function componentWillMonut() {}
 	    }, {
 	        key: '_getResult',
-	        value: function _getResult(value) {}
+	        value: function _getResult(value) {
+	            _list = this._formatList();
+	        }
 	    }, {
 	        key: '_formatList',
 	        value: function _formatList() {
