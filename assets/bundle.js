@@ -67,12 +67,12 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	_reactDom2.default.render(_react2.default.createElement(_autoComplete2.default, { value: 'lalala' }), document.getElementsByClassName('container')[0]); /*
-	                                                                                                                                                        * @Author: pengyanxin
-	                                                                                                                                                        * @Date:   2016-01-15 15:19:19
-	                                                                                                                                                        * @Last Modified by:   blankmanp
-	                                                                                                                                                        * @Last Modified time: 2016-01-21 15:32:02
-	                                                                                                                                                        */
+	_reactDom2.default.render(_react2.default.createElement(_autoComplete2.default, { value: 'lalala', list: [1, 11, 112, 113, 123] }), document.getElementsByClassName('container')[0]); /*
+	                                                                                                                                                                                      * @Author: pengyanxin
+	                                                                                                                                                                                      * @Date:   2016-01-15 15:19:19
+	                                                                                                                                                                                      * @Last Modified by:   blankmanp
+	                                                                                                                                                                                      * @Last Modified time: 2016-01-26 14:47:12
+	                                                                                                                                                                                      */
 
 /***/ },
 /* 2 */
@@ -19728,8 +19728,6 @@
 
 	'use strict';
 
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
-
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	Object.defineProperty(exports, "__esModule", {
@@ -19770,53 +19768,59 @@
 	    }
 
 	    _createClass(AutoComplete, [{
+	        key: 'componentWillMount',
+	        value: function componentWillMount() {
+	            this._list = this._formatList();
+	            this._getResult(this.props.value);
+	        }
+	    }, {
 	        key: 'componentWillReceiveProps',
 	        value: function componentWillReceiveProps() {}
 	    }, {
-	        key: 'componentWillMonut',
-	        value: function componentWillMonut() {}
-	    }, {
 	        key: '_getResult',
-	        value: function _getResult(value) {
-	            this._list = this._formatList();
+	        value: function _getResult(inputValue) {
+	            var _props = this.props;
+	            var valueName = _props.valueName;
+	            var labelName = _props.labelName;
+
+	            var result = [];
+	            _lodash2.default.forEach(this._list, function (item) {
+	                if (item[labelName].indexOf(inputValue) !== -1) {
+	                    result.push(item);
+	                }
+	            });
+	            this.setState({
+	                value: inputValue,
+	                results: result
+	            });
 	        }
 	    }, {
 	        key: '_formatList',
 	        value: function _formatList() {
-	            var _this2 = this;
+	            var _props2 = this.props;
+	            var valueName = _props2.valueName;
+	            var labelName = _props2.labelName;
+	            var list = _props2.list;
 
-	            var tempList = this.props.list;
-	            if (_lodash2.default.isArray(tempList)) {
-	                var _ret = function () {
+	            if (_lodash2.default.isArray(list)) {
+	                return _lodash2.default.map(list, function (value) {
 	                    var tempObj = {};
-	                    return {
-	                        v: _lodash2.default.map(tempList, function (value) {
-	                            if (_lodash2.default.isObject(value)) {
-	                                tempObj[_this2.props.valueName] = value[_this2.props.valueName];
-	                                tempObj[_this2.props.labelName] = value[_this2.props.labelName];
-	                                return tempObj;
-	                            }
-	                            tempObj[_this2.props.valueName] = value;
-	                            tempObj[_this2.props.labelName] = value;
-	                            return tempObj;
-	                        })
-	                    };
-	                }();
-
-	                if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
-	            } else if (_lodash2.default.isObject(tempList)) {
-	                var _ret2 = function () {
+	                    if (_lodash2.default.isObject(value)) {
+	                        tempObj[valueName] = '' + value[valueName];
+	                        tempObj[labelName] = '' + value[labelName];
+	                        return tempObj;
+	                    }
+	                    tempObj[valueName] = '' + value;
+	                    tempObj[labelName] = '' + value;
+	                    return tempObj;
+	                });
+	            } else if (_lodash2.default.isObject(list)) {
+	                return _lodash2.default.map(list, function (value, key) {
 	                    var tempObj = {};
-	                    return {
-	                        v: _lodash2.default.map(tempList, function (value, key) {
-	                            tempObj[_this2.props.valueName] = value;
-	                            tempObj[_this2.props.labelName] = key;
-	                            return tempObj;
-	                        })
-	                    };
-	                }();
-
-	                if ((typeof _ret2 === 'undefined' ? 'undefined' : _typeof(_ret2)) === "object") return _ret2.v;
+	                    tempObj[valueName] = '' + value;
+	                    tempObj[labelName] = '' + key;
+	                    return tempObj;
+	                });
 	            }
 	        }
 	    }, {
@@ -19837,6 +19841,7 @@
 	        key: 'handleChange',
 	        value: function handleChange(e) {
 	            var value = e.target.value;
+	            this._getResult(value);
 	        }
 	    }, {
 	        key: 'render',
@@ -19845,15 +19850,33 @@
 	            var showList = _state.showList;
 	            var index = _state.index;
 	            var value = _state.value;
+	            var results = _state.results;
 
 	            var ulStyle = {
-	                display: showList ? 'block' : 'none'
+	                display: showList && results.length ? 'block' : 'none'
 	            };
+	            var _props3 = this.props;
+	            var valueName = _props3.valueName;
+	            var labelName = _props3.labelName;
+
 	            return _react2.default.createElement(
 	                'div',
-	                null,
-	                _react2.default.createElement('input', { type: 'text', value: this.props.value, onChange: this.handleChange }),
-	                _react2.default.createElement('ul', { style: ulStyle })
+	                { onFocus: this.handleFocus.bind(this),
+	                    onBlur: this.handleBlur.bind(this),
+	                    className: 'autoComplete'
+	                },
+	                _react2.default.createElement('input', { type: 'text', value: value, onChange: this.handleChange.bind(this) }),
+	                _react2.default.createElement(
+	                    'ul',
+	                    { style: ulStyle },
+	                    _lodash2.default.map(results, function (item, itemIndex) {
+	                        return _react2.default.createElement(
+	                            'li',
+	                            { key: itemIndex },
+	                            '' + item[labelName]
+	                        );
+	                    })
+	                )
 	            );
 	        }
 	    }]);
