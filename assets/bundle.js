@@ -44,8 +44,7 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(1);
-	(function webpackMissingModule() { throw new Error("Cannot find module \"./app/test.js\""); }());
+	module.exports = __webpack_require__(1);
 
 
 /***/ },
@@ -19779,7 +19778,7 @@
 	    }, {
 	        key: '_getResult',
 	        value: function _getResult(value) {
-	            _list = this._formatList();
+	            this._list = this._formatList();
 	        }
 	    }, {
 	        key: '_formatList',

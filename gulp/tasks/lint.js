@@ -1,8 +1,8 @@
 /*
 * @Author: pengyanxin
 * @Date:   2016-01-15 16:54:01
-* @Last Modified by:   pengyanxin
-* @Last Modified time: 2016-01-15 18:14:16
+* @Last Modified by:   blankmanp
+* @Last Modified time: 2016-01-26 11:55:58
 */
 
 import gulp from 'gulp';
@@ -27,7 +27,7 @@ gulp.task('lint', () => {
     // So, it's best to have gulp ignore the directory as well.
     // Also, Be sure to return the stream from the task;
     // Otherwise, the task may end before the stream has finished.
-    return linter('?(app|config|gulp|lib|server)/**/*.js?(x)');
+    return linter('?(app|config|src|gulp|lib|server)/**/*.js?(x)');
 });
 
 export default function linter(path) {

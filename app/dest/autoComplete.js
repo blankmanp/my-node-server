@@ -50,7 +50,7 @@ var AutoComplete = function (_React$Component) {
     }, {
         key: '_getResult',
         value: function _getResult(value) {
-            _list = this._formatList();
+            this._list = this._formatList();
         }
     }, {
         key: '_formatList',
