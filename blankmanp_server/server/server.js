@@ -2,22 +2,26 @@
 * @Author: blankmanp
 * @Date:   2016-02-04 09:43:54
 * @Last Modified by:   blankmanp
-* @Last Modified time: 2016-02-12 14:55:42
+* @Last Modified time: 2016-02-15 17:41:35
 */
 
 'use strict';
 
+let route = require('./router');
 let http = require('http');
 let fs = require('fs');
 
-function server(handle, route) {
+let app = {};
+let methods = ['get', 'post', 'pull', 'del'];
+
+app.listen = (port) => {
     http.createServer((request, response) => {
         if (request.url === '/favicon.ico') {
             response.end();
-            return;
+            return ;
         }
-        route(handle, request, response);
-    }).listen(8888);
+        route(request, response);
+    }).listen(port);
 }
 
-exports.start = server;
+module.exports = app;
