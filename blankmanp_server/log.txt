@@ -1,5 +1,0 @@
-open file error: Error: ENOENT: no such file or directory, open '../test.txt' Thu Feb 11 2016 11:10:00 GMT+0800 (CST)
-open file error: Error: ENOENT: no such file or directory, open '../test.txt' Thu Feb 11 2016 11:10:07 GMT+0800 (CST)
-open file error: Error: ENOENT: no such file or directory, open '../test.txt' Thu Feb 11 2016 11:10:09 GMT+0800 (CST)
-open file error: Error: ENOENT: no such file or directory, open '../test.txt' Thu Feb 11 2016 15:10:13 GMT+0800 (CST)
-open file error: Error: ENOENT: no such file or directory, open '../test.txt' Thu Feb 11 2016 15:11:39 GMT+0800 (CST)
