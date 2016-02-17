@@ -1,0 +1,57 @@
+<div class="container">
+    <form class="form-horizontal" id="loginForm">
+        <div class="form-group">
+            <label for="user" class="col-sm-2 control-label">User: </label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="user">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password" class="col-sm-2 control-label">Password: </label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" name="password">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button class="btn btn-default">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    document.getElementById('loginForm').onsubmit = login;
+    function login(e) {
+        e.preventDefault();
+        var target = e.target,
+            user = target.user.value,
+            password = target.password.value;
+        if (!user) {
+            return alert('username is null!');
+        }
+        if (!password) {
+            return alert('password is null!');
+        }
+        var xhr = new XMLHttpRequest(),
+            formdata = JSON.stringify({'user': user, 'password': password});
+        xhr.open('POST', '/checkLogin');
+        xhr.timeout = 3000;
+        xhr.ontimeout = function() {
+            alert('pls check the internet');
+        }
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    var res = JSON.parse(xhr.responseText);
+                    if (res.success) {
+                        window.location.href = '/home';
+                    }
+                }
+                else
+                    alert(xhr.statusText);
+            }
+        }
+        xhr.send(formdata);
+    }
+</script>
