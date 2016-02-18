@@ -2,7 +2,7 @@
 * @Author: blankmanp
 * @Date:   2016-02-18 15:09:43
 * @Last Modified by:   blankmanp
-* @Last Modified time: 2016-02-18 16:43:28
+* @Last Modified time: 2016-02-18 18:22:44
 */
 
 'use strict';
@@ -18,27 +18,56 @@ let mimetypes = {
     '.js': 'text/javascript',
     '.css': 'text/css',
     '.html': 'text/html'
+};
+
+let cache = {};
+
+function readCache(file, callback) {
+    if (!cache[file]) {
+        fs.readFile(`./static/${file}`, function(err, data) {
+            if (!err) {
+                cache[file] = {
+                    content: data,
+                    timestamp: Date.now()
+                };
+            }
+            callback(err, data)
+        });
+        return;
+    }
+    callback(null, cache[file].content);
+    console.log(`read ${file} from cache`);
 }
 
 http.createServer((req, res) => {
     let link = url.parse(decodeURI(req.url));
-    let lookup = link.pathname === '/index' ? 'index.html' : link.pathname;
-    fs.exists(`./static/${lookup}`, function(exist){
-        if (exist) {
+    let lookup = link.pathname === '/index' ? 'index.html' : link.pathname.slice(1);
+    if (lookup === 'favicon.ico') {
+        res.end();
+        return;
+    }
+    fs.stat(`./static/${lookup}`, function(err, stats){
+        if (err) {
+            res.writeHead(404);
+            res.end('' + err);
+            return;
+        }
+        let updateTime = Date.parse(stats.ctime);
+        let isUpdated = !!cache[lookup] && updateTime > cache[lookup].timestamp;
+        if (!cache[lookup] || isUpdated) {
             fs.readFile(`./static/${lookup}`, function(err, data) {
-                if (err) {
-                    res.writeHead(500);
-                    res.end('' + err);
-                } else {
-                    let extname = path.extname(lookup);
-                    res.writeHead(200, {'Content-Type': mimetypes[extname]});
-                    res.end(data);
-                }
+                console.log(`load ${lookup} from file`);
+                cache[lookup] = {
+                    content: data,
+                    timestamp: Date.now()
+                };
+                res.writeHead(200, {'Content-Type': mimetypes[path.extname(lookup)]});
+                res.end(data);
             })
             return;
-        } else {
-            res.write(404);
-            res.end();
         }
+        console.log(`load ${lookup} from cache`);
+        res.writeHead(200, {'Content-Type': mimetypes[path.extname(lookup)]});
+        res.end(cache[lookup].content);
     })
 }).listen(8888);
