@@ -2,7 +2,7 @@
 * @Author: blankmanp
 * @Date:   2016-02-04 09:43:54
 * @Last Modified by:   blankmanp
-* @Last Modified time: 2016-02-17 19:16:46
+* @Last Modified time: 2016-02-18 12:36:25
 */
 
 'use strict';
@@ -24,12 +24,12 @@ let router = koarouter();
 let pages = fs.readdirSync('./stylesheet/html/');
 let layout = fs.readFileSync('layout.html');
 
-let noCheck = ['login'];
+let noCheck = ['login', 'home'];
 
 function requireLogin() {
     return function *(next) {
         if (!this.session.login) {
-            this.redirect('/');
+            this.redirect('/login');
         } else {
             yield next;
         }
@@ -39,10 +39,11 @@ function requireLogin() {
 function getBodyHtml(page) {
     let bodyLayout = fs.readFileSync(`./stylesheet/html/${page}`);
     let temp = '';
+    let user = this.session.login || '';
     switch (page) {
         case 'home.html':
             let data = {
-                user: this.session.login
+                user: user
             }
             temp = _.template(bodyLayout)(data);
             break;
@@ -71,7 +72,13 @@ router.post('/checkLogin', function *(next) {
     let data = JSON.parse(this.request.body);
     if (data.user === username && data.password === password) {
         this.session.login = data.user;
-        this.body = {success: true};
+        this.body = { success: true };
+    } else {
+        if (data.user !== username) {
+            this.body = { success: false, info: 1 }
+        } else {
+            this.body = { success: false, info: 2 }
+        }
     }
 })
 
@@ -82,7 +89,7 @@ router.get('/logout', function *(next) {
 })
 
 
-router.redirect('/', '/login');
+router.redirect('/', '/home');
 
 app.keys = ['test'];
 
@@ -91,4 +98,4 @@ app.use(koastatic('stylesheet'));
 app.use(session(app));
 app.use(router.routes());
 
-app.listen(6666);
+app.listen(1111);

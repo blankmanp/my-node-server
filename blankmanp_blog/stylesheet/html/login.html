@@ -46,6 +46,12 @@
                     var res = JSON.parse(xhr.responseText);
                     if (res.success) {
                         window.location.href = '/home';
+                    } else {
+                        if (res.info === 1) {
+                            showWrongInfo('user');
+                        } else if (res.info === 2) {
+                            showWrongInfo('password');
+                        }
                     }
                 }
                 else
@@ -53,5 +59,9 @@
             }
         }
         xhr.send(formdata);
+    }
+    function showWrongInfo(name) {
+        var wrongInput = document.querySelector('input[name=' + name + ']');
+        wrongInput.value = '';
     }
 </script>
