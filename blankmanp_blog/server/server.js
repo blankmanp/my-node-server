@@ -2,7 +2,7 @@
 * @Author: blankmanp
 * @Date:   2016-02-04 09:43:54
 * @Last Modified by:   blankmanp
-* @Last Modified time: 2016-02-18 14:50:22
+* @Last Modified time: 2016-02-18 14:57:30
 */
 
 'use strict';
@@ -92,7 +92,7 @@ router.get('/logout', function *(next) {
 
 router.redirect('/', '/home');
 
-app.keys = ['test'];
+app.keys = ['seccur'];
 
 app.use(koaparser());
 app.use(koastatic('stylesheet'));

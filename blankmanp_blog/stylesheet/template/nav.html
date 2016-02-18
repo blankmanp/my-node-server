@@ -29,16 +29,19 @@
 </div>
 
 <script>
-    document.querySelector('.nav-user').onmouseover = function() {
-        var target = document.querySelector('.user-option');
-        var classname = target.className.split(' ');
-        classname.splice(-1);
-        target.className = classname.join(' ');
-    }
-    document.querySelector('.nav-user').onmouseout = function() {
-        var target = document.querySelector('.user-option');
-        var classname = target.className.split(' ');
-        classname.push('hide');
-        target.className = classname.join(' ');
+    var navUser = document.querySelector('.nav-user');
+    if (navUser) {
+        navUser.onmouseover = function() {
+            var target = document.querySelector('.user-option');
+            var classname = target.className.split(' ');
+            classname.splice(-1);
+            target.className = classname.join(' ');
+        }
+        navUser.onmouseout = function() {
+            var target = document.querySelector('.user-option');
+            var classname = target.className.split(' ');
+            classname.push('hide');
+            target.className = classname.join(' ');
+        }
     }
 </script>
