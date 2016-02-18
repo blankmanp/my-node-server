@@ -2,7 +2,7 @@
 * @Author: blankmanp
 * @Date:   2016-02-18 15:09:43
 * @Last Modified by:   blankmanp
-* @Last Modified time: 2016-02-18 18:22:44
+* @Last Modified time: 2016-02-18 18:28:31
 */
 
 'use strict';
@@ -21,23 +21,6 @@ let mimetypes = {
 };
 
 let cache = {};
-
-function readCache(file, callback) {
-    if (!cache[file]) {
-        fs.readFile(`./static/${file}`, function(err, data) {
-            if (!err) {
-                cache[file] = {
-                    content: data,
-                    timestamp: Date.now()
-                };
-            }
-            callback(err, data)
-        });
-        return;
-    }
-    callback(null, cache[file].content);
-    console.log(`read ${file} from cache`);
-}
 
 http.createServer((req, res) => {
     let link = url.parse(decodeURI(req.url));
