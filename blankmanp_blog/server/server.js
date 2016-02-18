@@ -2,7 +2,7 @@
 * @Author: blankmanp
 * @Date:   2016-02-04 09:43:54
 * @Last Modified by:   blankmanp
-* @Last Modified time: 2016-02-18 12:36:25
+* @Last Modified time: 2016-02-18 14:50:22
 */
 
 'use strict';
@@ -25,6 +25,7 @@ let pages = fs.readdirSync('./stylesheet/html/');
 let layout = fs.readFileSync('layout.html');
 
 let noCheck = ['login', 'home'];
+let noNavPage = ['login.html'];
 
 function requireLogin() {
     return function *(next) {
@@ -39,18 +40,19 @@ function requireLogin() {
 function getBodyHtml(page) {
     let bodyLayout = fs.readFileSync(`./stylesheet/html/${page}`);
     let temp = '';
-    let user = this.session.login || '';
-    switch (page) {
-        case 'home.html':
-            let data = {
-                user: user
-            }
-            temp = _.template(bodyLayout)(data);
-            break;
-        default:
-            // statements_def
-            break;
+    let data = { user: this.session.login || '' };
+    if (_.indexOf(noNavPage, page) === -1) {
+        let templateFile = fs.readdirSync('./stylesheet/template/');
+        let template = {};
+        _.forEach(templateFile, (p) => {
+            p = p.slice(0, -5)
+            template[p] = fs.readFileSync(`./stylesheet/template/${p}.html`)
+        });
+        _.forEach(template, (p, i) => {
+            data[i] = _.template(p)({ user: this.session.login || '' });
+        })
     }
+    temp = _.template(bodyLayout)(data);
     return temp || bodyLayout;
 }
 
@@ -83,7 +85,6 @@ router.post('/checkLogin', function *(next) {
 })
 
 router.get('/logout', function *(next) {
-    console.log(1);
     this.session = null;
     this.redirect('/');
 })

@@ -2,10 +2,11 @@
 * @Author: blankmanp
 * @Date:   2016-02-16 17:03:41
 * @Last Modified by:   blankmanp
-* @Last Modified time: 2016-02-17 15:01:08
+* @Last Modified time: 2016-02-18 13:56:20
 */
 
 * {
+    position: relative;
     padding: 0;
     margin: 0;
 }
@@ -38,5 +39,15 @@ html, body {
     margin-right: 10px;
 }
 .avatar>img {
+    cursor: pointer;
     border-radius: 50%;
+}
+
+.user-option {
+    position: absolute;
+    width: 100px;
+    left: -30px;
+}
+.user-option li {
+    padding: 0;
 }
