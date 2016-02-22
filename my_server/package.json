@@ -1,0 +1,14 @@
+{
+  "name": "my_server",
+  "version": "0.0.1",
+  "author": "blanmanp",
+  "description": "",
+  "keywords": [
+    "node.js",
+    "javascript"
+  ],
+  "dependencies": {
+    "formidable": "^1.0.17",
+    "lodash": "^4.5.0"
+  }
+}
