@@ -2,7 +2,7 @@
 * @Author: blankmanp
 * @Date:   2016-02-22 11:49:29
 * @Last Modified by:   blankmanp
-* @Last Modified time: 2016-02-26 11:40:18
+* @Last Modified time: 2016-02-26 22:21:42
 */
 
 'use strict';
@@ -29,13 +29,9 @@ let filePath = {
 
 let handle = {
     index: {
-        _render: (request, response) => {
-            readFileFromCache(request, response);
-        },
 
         uploadFile: {
             _render: (request, response) => {
-                console.log(request.method);
                 if (request.method !== 'POST') {
                     response.writeHead(404);
                     response.end('The page don\'t exist');
@@ -94,43 +90,6 @@ let handle = {
             }
         }
     }
-}
-
-function readFileFromCache(request, response) {
-    let link = url.parse(decodeURI(request.url));
-    let file = link.pathname;
-    console.log(link);
-    file.indexOf('.') === -1 && (file += '/index.html');
-    let filePath = `./static/${file}`;
-    fs.stat(filePath, (err, stats) => {
-        if (err) {
-            console.log(`can't read ${filePath}`);
-            response.writeHead(404);
-            response.end('' + err);
-            return;
-        }
-        let updateTime = Date.parse(stats.ctime);
-        let isUpdated = cache[file] && cache[file]._timeStamp < updateTime;
-        if (!cache[file] || isUpdated) {
-            console.log(`read ${file} from file`)
-            fs.readFile(filePath, (err, data) => {
-                if (err) {
-                    response.end('' + err);
-                    return;
-                }
-                cache[file] = {
-                    _content: data,
-                    _timeStamp: Date.now()
-                };
-                response.writeHead(200, {'Content-Type': mimeTypes[path.extname(file)]});
-                response.end(data);
-            })
-            return;
-        }
-        console.log(`read ${file} from cache`);
-        response.writeHead(200, {'Content-Type': mimeTypes[path.extname(file)]});
-        response.end(cache[file]._content);
-    })
 }
 
 module.exports = handle;

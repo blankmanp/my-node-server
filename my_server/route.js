@@ -2,7 +2,7 @@
 * @Author: blankmanp
 * @Date:   2016-02-22 11:49:18
 * @Last Modified by:   blankmanp
-* @Last Modified time: 2016-02-26 12:06:24
+* @Last Modified time: 2016-02-26 22:22:21
 */
 
 'use strict';
@@ -12,21 +12,24 @@ const handle = require('./handle');
 const path = require('path');
 const fs = require('fs');
 const staticSource = './static';
-let mimeTypes = {
+const mimeTypes = {
     '.css': 'text/css',
-    '.js': 'text/javascript'
+    '.js': 'text/javascript',
+    '.html': 'text/html'
 };
 const filePath = {
     '.css': `${staticSource}/css`,
     '.js': `${staticSource}/js`,
+    '.html': `${staticSource}`
 }
 
+let cache = {} // 缓存
 
 function route(req, res) {
     let link = url.parse(decodeURI(req.url));
-    let pathname = path.normalize(link.pathname);
+    let pathname = path.normalize(link.pathname).substring(1);
     let temp = handle;
-    let wrongInfo = {};
+    // 如果是css/js/html文件就直接读取静态文件
     if (filePath[path.extname(pathname)]) {
         let tempFile = filePath[path.extname(pathname)]
         fs.stat(`${tempFile}/${pathname}`, (err, stats) => {
@@ -35,39 +38,66 @@ function route(req, res) {
                 res.end('' + err);
                 return;
             }
-            fs.readFile(`${tempFile}/${pathname}`, (err, data) => {
-                if (err) {
-                    res.end('' + err);
-                    return;
-                }
+            let updateTime = Date.parse(stats.ctime);
+            let isUpdated = cache[pathname] && cache[pathname].timeStamp < updateTime;
+            if (!cache[pathname] || isUpdated) {
+                fs.readFile(`${tempFile}/${pathname}`, (err, data) => {
+                    if (err) {
+                        res.end('' + err);
+                        return;
+                    }
+                    res.writeHead(200, {'Content-Type': mimeTypes[path.extname(pathname)]});
+                    res.end(data);
+                    cache[pathname] = {
+                        content: data,
+                        timeStamp: Date.now()
+                    };
+                });
+            } else {
                 res.writeHead(200, {'Content-Type': mimeTypes[path.extname(pathname)]});
-                res.end(data);
-            });
+                res.end(cache[pathname].content);
+            }
         })
         return;
     }
-    pathname = pathname.substring(1).split('/');
-    if (pathname[0] === 'favicon.ico') {
+    // 如果是路径则读取handle里面的方法，渲染对应的页面使用_render方法
+    let pathnameArray = pathname.split('/');
+    if (pathnameArray[0] === 'favicon.ico') {
         res.end();
         return;
     }
-    pathname.forEach((v) => {
-        if (v.indexOf('.') !== -1) {
-            v = v.split('.')[0];
-        }
-        if (temp[v]) {
+    pathnameArray[pathnameArray.length - 1] === '' && pathnameArray.splice(pathnameArray.length - 1);
+    pathnameArray.every((v) => {
+        if (temp[v] && typeof temp[v]._render === 'function') {
             temp = temp[v];
+            return true;
         } else {
-            wrongInfo.type = 404;
-            wrongInfo.mess = 'page not found';
+            temp = undefined;
+            // 如果没有这种方法就去寻找对应的html页面
+            fs.stat(`${staticSource}/${pathname}.html`, (err, stats) => {
+                if (err) {
+                    fs.stat(`${staticSource}/${pathname}/index.html`, (error, indexStats) => {
+                        if (error) {
+                            res.writeHead(404);
+                            res.end('page not found!');
+                        } else {
+                            fs.readFile(`${staticSource}/${pathname}/index.html`, (err, data) => {
+                                res.writeHead(200, {'Content-Type': 'text/html'});
+                                res.end(data);
+                            })
+                        }
+                    })
+                } else {
+                    fs.readFile(`${staticSource}/${pathname}.html`, (err, data) => {
+                        res.writeHead(200, {'Content-Type': 'text/html'});
+                        res.end(data);
+                    })
+                }
+            })
+            return false;
         }
     })
-    if (!wrongInfo.type) {
-        temp._render(req, res);
-    } else {
-        res.writeHead(wrongInfo.type);
-        res.end(wrongInfo.mess);
-    }
+    temp && temp._render(req, res);
 }
 
 module.exports = route;
