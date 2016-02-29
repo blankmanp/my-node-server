@@ -2,7 +2,7 @@
 * @Author: blankmanp
 * @Date:   2016-02-22 11:49:29
 * @Last Modified by:   blankmanp
-* @Last Modified time: 2016-02-26 22:21:42
+* @Last Modified time: 2016-02-29 20:00:12
 */
 
 'use strict';
@@ -54,39 +54,59 @@ let handle = {
 
         download: {
             _render: (request, response) => {
+                response.writeHead(200, {'Content-Disposition': 'attachment;filename=test.js'})
                 let options = {};
-                options.file = '50meg';
+                options.file = 'handle.js';
                 options.fileSize = fs.statSync(options.file).size;
-                options.kbs = 32;
+                options.kbps = 1;
                 let download = Object.create(options);
                 download.chunk = new Buffer(options.fileSize);
                 download.bufferOffset = 0;
-                response.writeHead(200, {'Content-Length': options.fileSize});
                 fs.createReadStream(options.file)
                 .on('data', (chunk) => {
                     chunk.copy(download.chunk, download.bufferOffset);
                     download.bufferOffset += chunk.length;
-                    response.write(`${download.bufferOffset}\n`);
                 })
                 .once('open', () => {
-                })
-                .on('end', () => {
-                    response.end('done');
-                })
-                // function throttle(download, callback) {
-                //     let chunkOutSize = download.kbps * 1024;
-                //     let timer = 0;
-                //     (function loop(byteSent) {
-                //         if (!download.aborted) {
-                //             setTimeout(() => {
-                //                 let byteOut = byteSent + chunkOutSize;
-                //                 if (download.bufferOffset > byteOut) {
+                    let downloadAbort = throttle(download, (sent, done) => {
+                        if (done) {
+                            response.end(sent);
+                            return;
+                        }
+                        response.write(sent);
+                    })
+                    request.on('close', downloadAbort);
+                });
 
-                //                 }
-                //             })
-                //         }
-                //     }(0))
-                // }
+                function throttle(download, callback) {
+                    let chunkOutSize = download.kbps * 1024;
+                    let timer = 0;
+
+                    (function loop(byteSent){
+                        let remainingOffset;
+                        if (!download.aborted) {
+                            setTimeout(() => {
+                                let byteOut = chunkOutSize + byteSent;
+                                if (download.bufferOffset > byteOut) {
+                                    timer = 1000;
+                                    callback(download.chunk.slice(byteSent, byteOut));
+                                    loop(byteOut);
+                                    return;
+                                }
+                                if (byteOut >= download.chunk.length) {
+                                    remainingOffset = download.chunk.length - byteSent;
+                                    let done = true;
+                                    callback(download.chunk.slice(byteSent, download.chunk.length), done);
+                                    return;
+                                }
+                                loop(byteSent);
+                            }, timer)
+                        }
+                    }(0));
+                    return function() {
+                        download.aborted = true;
+                    }
+                }
             }
         }
     }

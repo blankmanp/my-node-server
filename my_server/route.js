@@ -2,7 +2,7 @@
 * @Author: blankmanp
 * @Date:   2016-02-22 11:49:18
 * @Last Modified by:   blankmanp
-* @Last Modified time: 2016-02-26 22:22:21
+* @Last Modified time: 2016-02-29 11:09:46
 */
 
 'use strict';
@@ -67,8 +67,11 @@ function route(req, res) {
         return;
     }
     pathnameArray[pathnameArray.length - 1] === '' && pathnameArray.splice(pathnameArray.length - 1);
-    pathnameArray.every((v) => {
-        if (temp[v] && typeof temp[v]._render === 'function') {
+    pathnameArray.every((v, index, arr) => {
+        if (index !== arr.length - 1 && temp[v]) {
+            temp = temp[v];
+            return true;
+        } else if (temp[v] && typeof temp[v]._render === 'function') {
             temp = temp[v];
             return true;
         } else {
