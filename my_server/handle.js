@@ -2,7 +2,7 @@
 * @Author: blankmanp
 * @Date:   2016-02-22 11:49:29
 * @Last Modified by:   blankmanp
-* @Last Modified time: 2016-02-29 20:00:12
+* @Last Modified time: 2016-03-02 17:32:14
 */
 
 'use strict';
@@ -30,6 +30,15 @@ let filePath = {
 let handle = {
     index: {
 
+        fun: {
+            _render: (request, response) => {
+                response.on('readable', () => {
+                    console.log(request.read());
+                })
+                response.end('hhh\n');
+            }
+        },
+
         uploadFile: {
             _render: (request, response) => {
                 if (request.method !== 'POST') {
@@ -54,6 +63,8 @@ let handle = {
 
         download: {
             _render: (request, response) => {
+                // 这段是用来测试xml2js这个module的
+                // 测试完毕
                 response.writeHead(200, {'Content-Disposition': 'attachment;filename=test.js'})
                 let options = {};
                 options.file = 'handle.js';
@@ -108,6 +119,10 @@ let handle = {
                     }
                 }
             }
+        },
+
+        test: {
+            _render: (request, response) => {}
         }
     }
 }
