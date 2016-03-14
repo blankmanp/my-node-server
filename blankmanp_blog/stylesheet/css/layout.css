@@ -2,7 +2,7 @@
 * @Author: blankmanp
 * @Date:   2016-02-16 17:03:41
 * @Last Modified by:   blankmanp
-* @Last Modified time: 2016-02-18 13:56:20
+* @Last Modified time: 2016-03-14 13:32:47
 */
 
 * {
@@ -16,38 +16,15 @@ html, body {
     font-family: 'Shadows Into Light Two';
     background-color: #eee;
 }
-.nav {
-    background: white;
-    height: 45px;
-}
-.nav>ul {
-    width: 1080px;
-    height: 100%;
-    margin: auto;
-}
-.nav>ul>li, .nav>ul>li>a {
-    height: 100%;
-}
-.nav>ul>li>a {
-    line-height: 25px;
-}
-.nav div {
-    height: 100%;
-}
-.nav .user-info>div {
-    line-height: 45px;
-    margin-right: 10px;
-}
-.avatar>img {
-    cursor: pointer;
-    border-radius: 50%;
+body {
+    padding-top: 70px;
 }
 
-.user-option {
-    position: absolute;
-    width: 100px;
-    left: -30px;
+#navbar-right {
+    height: 100%;
 }
-.user-option li {
-    padding: 0;
+.avatar {
+    margin: 5px 15px;
+    border-radius: 50%;
+    cursor: pointer;
 }

@@ -1,54 +1,42 @@
-<div class="nav">
-    <ul class="nav nav-pills">
-        <li role='presentation' name='home' class="active"><a href="/home">Home</a></li>
-        <li role='presentation' name='blog'><a href="/blog">Blog</a></li>
-        <li role='presentation' name='game'><a href="#">Game</a></li>
-        <div class="pull-right user-info">
-            <% if (user) { %>
-                <div class="user-name pull-left">
-                    <p>welcome <%= user %></p>
-                </div>
-                <div class="avatar nav-user pull-left">
-                    <img src="/img/blogIcon.jpg" alt="avatar" width="40" height="40">
-                    <ul class="user-option list-group hide">
-                        <li class="list-group-item text-center">
-                            <a href="/logout">logout</a>
-                        </li>
-                        <li class="list-group-item text-center">
-                            <a href="#">setting</a>
-                        </li>
-                    </ul>
-                </div>
-            <% } else { %>
-                <div class="pull-left">
-                    <a href="/login">login</a>
-                </div>
-            <% } %>  
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li role='presentation' name='home' class="active"><a href="/home">Home</a></li>
+                <li role='presentation' name='blog'><a href="/blog">Blog</a></li>
+                <li role='presentation' name='game'><a href="#">Game</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right" id="navbar-right">
+                <% if (user) { %>
+                    <li class="dropdown" id="navbar-user">
+                        <img class="avatar" width="40" height="40" src="/img/blogIcon.jpg" alt="avatar">
+                        <ul class="dropdown-menu">
+                            <li><a class="text-center" href="/logout">登出</a></li>
+                            <li><a class="text-center" href="#">设置</a></li>
+                        </ul>
+                    </li>
+                <% } else { %>
+                    <li><a href="/login">登录</a></li>
+                <% } %>
+            </ul>
         </div>
-    </ul>
-</div>
+    </div>
+</nav>
 
 <script>
-    (function() {
         var page = '<%= page %>', // 当前页面
             chosenLi = document.querySelector('li[name=' + page + ']'),
             activeLi = document.querySelector('li.active'),
-            navUser = document.querySelector('.nav-user');
+            user = document.querySelector('#navbar-user');
         activeLi === chosenLi || (activeLi.className = '');
         chosenLi.className || (chosenLi.className = 'active');
-        if (navUser) {
-            navUser.onmouseover = function() {
-                var target = document.querySelector('.user-option');
-                var classname = target.className.split(' ');
-                classname.splice(-1);
-                target.className = classname.join(' ');
+        if (user) {
+            user.onmouseenter = function() {
+                user.querySelector('.dropdown-menu').style.display = 'block';
             }
-            navUser.onmouseout = function() {
-                var target = document.querySelector('.user-option');
-                var classname = target.className.split(' ');
-                classname.push('hide');
-                target.className = classname.join(' ');
+            user.onmouseleave = function() {
+                user.querySelector('.dropdown-menu').style.display = 'none';
             }
         }
-    })()
+
 </script>

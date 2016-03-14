@@ -2,7 +2,7 @@
 * @Author: blankmanp
 * @Date:   2016-02-04 09:43:54
 * @Last Modified by:   blankmanp
-* @Last Modified time: 2016-03-14 11:21:08
+* @Last Modified time: 2016-03-14 13:16:12
 */
 
 'use strict';
@@ -24,7 +24,7 @@ let router = koarouter();
 let pages = fs.readdirSync('./stylesheet/html/');
 let layout = fs.readFileSync('layout.html');
 
-let noCheck = ['login'];
+let noCheck = ['login', 'home', 'blog'];
 let noNavPage = ['login.html'];
 
 function requireLogin() {
