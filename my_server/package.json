@@ -9,6 +9,7 @@
   ],
   "dependencies": {
     "formidable": "^1.0.17",
-    "lodash": "^4.5.0"
+    "lodash": "^4.5.0",
+    "mysql": "^2.10.2"
   }
 }

@@ -2,7 +2,7 @@
 * @Author: blankmanp
 * @Date:   2016-02-22 11:49:18
 * @Last Modified by:   blankmanp
-* @Last Modified time: 2016-02-29 11:09:46
+* @Last Modified time: 2016-03-14 10:18:45
 */
 
 'use strict';
@@ -66,9 +66,10 @@ function route(req, res) {
         res.end();
         return;
     }
-    pathnameArray[pathnameArray.length - 1] === '' && pathnameArray.splice(pathnameArray.length - 1);
+    let len = pathnameArray.length;
+    pathnameArray[len - 1] === '' && pathnameArray.splice(len - 1);
     pathnameArray.every((v, index, arr) => {
-        if (index !== arr.length - 1 && temp[v]) {
+        if (index !== len - 1 && temp[v]) {
             temp = temp[v];
             return true;
         } else if (temp[v] && typeof temp[v]._render === 'function') {
@@ -76,7 +77,7 @@ function route(req, res) {
             return true;
         } else {
             temp = undefined;
-            // 如果没有这种方法就去寻找对应的html页面
+            // 如果没有_render方法就去寻找对应的html页面
             fs.stat(`${staticSource}/${pathname}.html`, (err, stats) => {
                 if (err) {
                     fs.stat(`${staticSource}/${pathname}/index.html`, (error, indexStats) => {

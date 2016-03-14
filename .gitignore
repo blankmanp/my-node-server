@@ -3,3 +3,5 @@ assets
 lib
 app/dest/*
 README.md
+.DS_Store
+test_mysql.js

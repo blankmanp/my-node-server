@@ -1,8 +1,8 @@
 <div class="nav">
     <ul class="nav nav-pills">
-        <li role='presentation' class="active"><a href="#">Home</a></li>
-        <li role='presentation'><a href="#">Blog</a></li>
-        <li role='presentation'><a href="#">Game</a></li>
+        <li role='presentation' name='home' class="active"><a href="/home">Home</a></li>
+        <li role='presentation' name='blog'><a href="/blog">Blog</a></li>
+        <li role='presentation' name='game'><a href="#">Game</a></li>
         <div class="pull-right user-info">
             <% if (user) { %>
                 <div class="user-name pull-left">
@@ -17,7 +17,7 @@
                         <li class="list-group-item text-center">
                             <a href="#">setting</a>
                         </li>
-                    </ul> 
+                    </ul>
                 </div>
             <% } else { %>
                 <div class="pull-left">
@@ -29,19 +29,26 @@
 </div>
 
 <script>
-    var navUser = document.querySelector('.nav-user');
-    if (navUser) {
-        navUser.onmouseover = function() {
-            var target = document.querySelector('.user-option');
-            var classname = target.className.split(' ');
-            classname.splice(-1);
-            target.className = classname.join(' ');
+    (function() {
+        var page = '<%= page %>', // 当前页面
+            chosenLi = document.querySelector('li[name=' + page + ']'),
+            activeLi = document.querySelector('li.active'),
+            navUser = document.querySelector('.nav-user');
+        activeLi === chosenLi || (activeLi.className = '');
+        chosenLi.className || (chosenLi.className = 'active');
+        if (navUser) {
+            navUser.onmouseover = function() {
+                var target = document.querySelector('.user-option');
+                var classname = target.className.split(' ');
+                classname.splice(-1);
+                target.className = classname.join(' ');
+            }
+            navUser.onmouseout = function() {
+                var target = document.querySelector('.user-option');
+                var classname = target.className.split(' ');
+                classname.push('hide');
+                target.className = classname.join(' ');
+            }
         }
-        navUser.onmouseout = function() {
-            var target = document.querySelector('.user-option');
-            var classname = target.className.split(' ');
-            classname.push('hide');
-            target.className = classname.join(' ');
-        }
-    }
+    })()
 </script>

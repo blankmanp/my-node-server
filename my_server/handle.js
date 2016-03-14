@@ -2,7 +2,7 @@
 * @Author: blankmanp
 * @Date:   2016-02-22 11:49:29
 * @Last Modified by:   blankmanp
-* @Last Modified time: 2016-03-02 17:32:14
+* @Last Modified time: 2016-03-14 11:33:52
 */
 
 'use strict';
@@ -63,8 +63,6 @@ let handle = {
 
         download: {
             _render: (request, response) => {
-                // 这段是用来测试xml2js这个module的
-                // 测试完毕
                 response.writeHead(200, {'Content-Disposition': 'attachment;filename=test.js'})
                 let options = {};
                 options.file = 'handle.js';

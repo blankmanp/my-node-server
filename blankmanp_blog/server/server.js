@@ -2,7 +2,7 @@
 * @Author: blankmanp
 * @Date:   2016-02-04 09:43:54
 * @Last Modified by:   blankmanp
-* @Last Modified time: 2016-02-18 14:57:30
+* @Last Modified time: 2016-03-14 11:21:08
 */
 
 'use strict';
@@ -24,7 +24,7 @@ let router = koarouter();
 let pages = fs.readdirSync('./stylesheet/html/');
 let layout = fs.readFileSync('layout.html');
 
-let noCheck = ['login', 'home'];
+let noCheck = ['login'];
 let noNavPage = ['login.html'];
 
 function requireLogin() {
@@ -37,7 +37,7 @@ function requireLogin() {
     }
 }
 // 这只是很弱智的处理方法，一旦类型多了之后就爆炸了。。。。
-function getBodyHtml(page) {
+function getBodyHTML(page) {
     let bodyLayout = fs.readFileSync(`./stylesheet/html/${page}`);
     let temp = '';
     let data = { user: this.session.login || '' };
@@ -45,11 +45,11 @@ function getBodyHtml(page) {
         let templateFile = fs.readdirSync('./stylesheet/template/');
         let template = {};
         _.forEach(templateFile, (p) => {
-            p = p.slice(0, -5)
+            p = p.slice(0, -5);
             template[p] = fs.readFileSync(`./stylesheet/template/${p}.html`)
         });
         _.forEach(template, (p, i) => {
-            data[i] = _.template(p)({ user: this.session.login || '' });
+            data[i] = _.template(p)({ user: this.session.login || '', page: page.slice(0, -5) });
         })
     }
     temp = _.template(bodyLayout)(data);
@@ -64,7 +64,7 @@ _.forEach(pages, (page) => {
     router.get(`/${temp}`, function *(next) {
         let data = {
             title: `blankmanp-${temp}`,
-            body: getBodyHtml.call(this, page)
+            body: getBodyHTML.call(this, page)
         };
         this.body = _.template(layout)(data);
     })
