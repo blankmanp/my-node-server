@@ -2,7 +2,7 @@
 * @Author: blankmanp
 * @Date:   2016-02-16 17:03:41
 * @Last Modified by:   blankmanp
-* @Last Modified time: 2016-03-14 13:32:47
+* @Last Modified time: 2016-03-14 15:47:09
 */
 
 * {
@@ -24,7 +24,7 @@ body {
     height: 100%;
 }
 .avatar {
-    margin: 5px 15px;
+    margin: 5px 30px;
     border-radius: 50%;
     cursor: pointer;
 }

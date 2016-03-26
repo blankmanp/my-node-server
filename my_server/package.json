@@ -8,8 +8,13 @@
     "javascript"
   ],
   "dependencies": {
+    "babel": "^6.5.2",
+    "babel-core": "^6.7.4",
     "formidable": "^1.0.17",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
     "lodash": "^4.5.0",
-    "mysql": "^2.10.2"
+    "mysql": "^2.10.2",
+    "webpack": "^1.12.14"
   }
 }

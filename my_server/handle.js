@@ -2,7 +2,7 @@
 * @Author: blankmanp
 * @Date:   2016-02-22 11:49:29
 * @Last Modified by:   blankmanp
-* @Last Modified time: 2016-03-14 11:33:52
+* @Last Modified time: 2016-03-26 21:53:15
 */
 
 'use strict';
@@ -118,6 +118,8 @@ let handle = {
                 }
             }
         },
+
+        algorithm: {},
 
         test: {
             _render: (request, response) => {}
