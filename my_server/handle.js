@@ -2,7 +2,7 @@
 * @Author: blankmanp
 * @Date:   2016-02-22 11:49:29
 * @Last Modified by:   blankmanp
-* @Last Modified time: 2016-03-26 21:53:15
+* @Last Modified time: 2016-04-01 16:01:08
 */
 
 'use strict';
@@ -14,6 +14,8 @@ const util = require('util');
 const querystring = require('querystring');
 const _ = require('lodash');
 const formidable = require('formidable');
+
+const myBabel = require('./myBabel');
 
 let staticSource = './static';
 let cache = {};
@@ -119,10 +121,22 @@ let handle = {
             }
         },
 
-        algorithm: {},
-
         test: {
             _render: (request, response) => {}
+        }
+    },
+
+    algorithm: {
+        _render: (request, response) => {
+            fs.stat(`${filePath['.js']}/sort.js`, (err, stats) => {
+                if (err) {
+                    myBabel.transformFileSync(`${staticSource}/algorithm/sort.js`);
+                }
+                myBabel.watchAndWrite(`${staticSource}/algorithm/sort.js`);
+                let page = fs.readFileSync(`${staticSource}/algorithm/index.html`);
+                response.writeHead(200);
+                response.end(page);
+            })
         }
     }
 }

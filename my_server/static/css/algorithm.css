@@ -1,0 +1,16 @@
+/*
+* @Author: blankmanp
+* @Date:   2016-03-27 20:01:32
+* @Last Modified by:   blankmanp
+* @Last Modified time: 2016-03-27 20:18:13
+*/
+.algorithmCategory:before {
+    float: left;
+    content: '';
+    width: 5px;
+    height: 5px;
+    margin: 15px;
+    border-radius: 5px;
+    background: black;
+    display: block;
+}
