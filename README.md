@@ -5,9 +5,16 @@
 个人打算开发一下autoComplete组件，写来玩玩。
 目前的计划是默认数据存储在组件上，默认数据的数据类型为数组/对象，搜索这一步组件内部函数来搞定，暂时不考虑和后台的交互问题
 
-# blankmanp_server
+# blankmanp_blog
 开发一个简单的服务器，熟悉一下服务器的工作流程
+目前进程：在用koa & ES6写自己blog的服务器
 
-# week's todo list
-把autocomplete组件给完善一下；
-blankmanp_server搞定route
+# my_server
+这是一个自己从底层开始写的node，除了babel之外没有用其他任何框架，主要用来熟悉node
+目前写了个myBabel.js，利用babel-core的接口以及babel-polyfill来实现了ES6的转码，并且可以在浏览器上展示出来；
+还写了点小东西，主要实现了文件上传、下载节流等功能，同时完善了route的逻辑，只要在static里面添加文件夹以及相应的index.html即可展现出对应的HTML页面，而且在没有文件后缀名的时候会默认访问html页面，然后再去访问同名文件夹下面的index.html
+顺便写了个algorithm页面来展示算法的逻辑，使用ES6完成算法部分的代码，使用canvas进行绘图，目前刚写完冒泡算法的工作流程；
+
+# todo list
+目前打算继续完善算法部分，把排序什么的流程都给展现一遍。
+有空的话专门给算法部分写个服务器算了。。。然后新开一个仓库，顺便把目前这个仓库改下，这仓库太乱了。。。
