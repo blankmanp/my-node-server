@@ -2,7 +2,7 @@
 * @Author: blankmanp
 * @Date:   2016-02-22 11:49:29
 * @Last Modified by:   blankmanp
-* @Last Modified time: 2016-04-01 16:01:08
+* @Last Modified time: 2016-04-04 21:27:49
 */
 
 'use strict';
@@ -129,7 +129,8 @@ let handle = {
     algorithm: {
         _render: (request, response) => {
             fs.stat(`${filePath['.js']}/sort.js`, (err, stats) => {
-                if (err) {
+                let sortStats = fs.statSync(`${staticSource}/algorithm/sort.js`);
+                if (err || Date.parse(stats.mtime) < Date.parse(sortStats.mtime)) {
                     myBabel.transformFileSync(`${staticSource}/algorithm/sort.js`);
                 }
                 myBabel.watchAndWrite(`${staticSource}/algorithm/sort.js`);
